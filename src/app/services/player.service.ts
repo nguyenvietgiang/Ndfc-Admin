@@ -1,9 +1,37 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Player } from '../models/player.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayerService {
+  private apiUrl: string = environment.apiUrl;
 
-  constructor() { }
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
+
+  getPlayerList(): Observable<Player[]> {
+    const url = `${this.apiUrl}/Player`;
+    return this.http.get<any>(url).pipe(
+      map((response: any) => response.content)
+    );
+  }
+
+  getPlayerById(id: string): Observable<Player> {
+    const url = `${this.apiUrl}/Player/${id}`;
+    return this.http.get<Player>(url);
+  }
+
+  deletePlayer(id: string): Observable<any> {
+    const url = `${this.apiUrl}/Player/${id}`;
+    const token = this.cookieService.get('token');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.delete(url, { headers });
+  }  
 }
+
+

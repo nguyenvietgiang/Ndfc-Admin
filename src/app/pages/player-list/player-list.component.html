@@ -1,28 +1,43 @@
 <nz-table #basicTable [nzData]="listOfData">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Address</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of basicTable.data">
-        <td>{{ data.name }}</td>
-        <td>{{ data.age }}</td>
-        <td>{{ data.address }}</td>
-        <td>
-          <button nz-button [nzType]="'primary'" (click)="showModal()"><span>Show Modal</span></button>
-        </td>
-      </tr>
-    </tbody>
-  </nz-table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Image</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{ data.name }}</td>
+      <td>{{ data.age }}</td>
+      <td><img [src]="data.sImg" width="50" height="50" alt="Player Image"></td>
+      <td>{{ data.status }}</td>
+      <td>
+        <button nz-button [nzType]="'primary'" (click)="showModal(data.id)"><span>Show Modal</span></button>
+        <button
+          nz-popconfirm
+          nzPopconfirmTitle="Are you sure delete this task?"
+          (nzOnConfirm)="deletePlayer(data.id)" 
+          (nzOnCancel)="cancel()"
+          nzPopconfirmPlacement="topLeft"
+          nz-button
+          nzDanger
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
 
-  <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-    <ng-container *nzModalContent>
-      <p>Content one</p>
-      <p>Content two</p>
-      <p>Content three</p>
-    </ng-container>
-  </nz-modal>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Player Detail" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <p><strong>Name:</strong> {{ selectedPlayer?.name }}</p>
+    <p><strong>Age:</strong> {{ selectedPlayer?.age }}</p>
+    <p><strong>Image:</strong></p>
+    <img [src]="selectedPlayer?.sImg" width="200" height="200" alt="Player Image">
+    <p><strong>Status:</strong> {{ selectedPlayer?.status }}</p>
+  </ng-container>
+</nz-modal>

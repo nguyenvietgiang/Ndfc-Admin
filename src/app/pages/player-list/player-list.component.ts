@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Person {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-}
+import { Player } from 'src/app/models/player.model';
+import { PlayerService } from 'src/app/services/player.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-player-list',
@@ -14,33 +10,52 @@ interface Person {
 })
 export class PlayerListComponent implements OnInit {
   isVisible = false;
-  listOfData: Person[] = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
-    }
-  ];
-  constructor() { }
+  listOfData: Player[] = [];
+  selectedPlayer: Player | undefined;
+
+  cancel(): void {
+    this.nzMessageService.info('click cancel');
+  }
+  constructor(private playerService: PlayerService, private nzMessageService: NzMessageService) { }
 
   ngOnInit(): void {
+    this.getPlayerList();
   }
-  
-  showModal(): void {
-    this.isVisible = true;
+
+  getPlayerList(): void {
+    this.playerService.getPlayerList().subscribe(
+      (players: Player[]) => {
+        this.listOfData = players;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
+  deletePlayer(id: string): void {
+    this.playerService.deletePlayer(id).subscribe(
+      () => {
+        this.nzMessageService.success('Player deleted successfully.');
+        this.getPlayerList();
+      },
+      (error: any) => {
+        console.error(error);
+        this.nzMessageService.error('Failed to delete player.');
+      }
+    );
+  }  
+
+  showModal(id: string): void {
+    this.playerService.getPlayerById(id).subscribe(
+      (player: Player) => {
+        this.selectedPlayer = player;
+        this.isVisible = true;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
   }
 
   handleOk(): void {
@@ -52,4 +67,6 @@ export class PlayerListComponent implements OnInit {
     console.log('Button cancel clicked!');
     this.isVisible = false;
   }
+  
 }
+
