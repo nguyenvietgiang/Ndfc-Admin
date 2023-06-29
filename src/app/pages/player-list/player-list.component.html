@@ -1,3 +1,6 @@
+<button nz-button nzType="primary" (click)="showAddingModal()">
+  <span>Add Player</span>
+</button>
 <nz-table #basicTable [nzData]="listOfData">
   <thead>
     <tr>
@@ -31,13 +34,62 @@
     </tr>
   </tbody>
 </nz-table>
-
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Player Detail" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+ <!-- Detail modal -->
+<nz-modal [(nzVisible)]="isVisibleDetail" nzTitle="Player Detail" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
   <ng-container *nzModalContent>
     <p><strong>Name:</strong> {{ selectedPlayer?.name }}</p>
     <p><strong>Age:</strong> {{ selectedPlayer?.age }}</p>
     <p><strong>Image:</strong></p>
     <img [src]="selectedPlayer?.sImg" width="200" height="200" alt="Player Image">
     <p><strong>Status:</strong> {{ selectedPlayer?.status }}</p>
+  </ng-container>
+</nz-modal>
+<!-- Add model -->
+<nz-modal
+  [(nzVisible)]="isVisibleAdding"
+  nzTitle="Add Player"
+  (nzOnCancel)="handleCancelAdding()"
+  (nzOnOk)="handleOkAdding()"
+>
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="addPlayerForm" (ngSubmit)="handleOkAdding()">
+      <nz-form-item>
+        <nz-form-label [nzFor]="'name'">Name:</nz-form-label>
+        <nz-form-control nzHasFeedback>
+          <input nz-input formControlName="name" id="name" />
+        </nz-form-control>
+       
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzFor]="'age'">Age:</nz-form-label>
+        <nz-form-control nzHasFeedback>
+          <input nz-input formControlName="age" id="age" type="number" />
+        </nz-form-control>
+      
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzFor]="'position'">Position:</nz-form-label>
+        <nz-form-control  nzHasFeedback>
+          <input nz-input formControlName="position" id="position" />
+        </nz-form-control>
+      
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzFor]="'role'">Role:</nz-form-label>
+        <nz-form-control  nzHasFeedback>
+          <input nz-input formControlName="role" id="role" />
+        </nz-form-control>
+      
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzFor]="'image'">Image:</nz-form-label>
+        <nz-form-control  nzHasFeedback>
+          <input nz-input type="file" (change)="handleImageChange($event)" id="image" />
+        </nz-form-control>
+        <div *ngIf="selectedImage" class="preview-image">
+          <img [src]="previewImageUrl" alt="Preview Image" width="200" height="200" />
+        </div>
+      </nz-form-item>
+    </form>
   </ng-container>
 </nz-modal>

@@ -11,7 +11,6 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class PlayerService {
   private apiUrl: string = environment.apiUrl;
-
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   getPlayerList(): Observable<Player[]> {
@@ -20,6 +19,14 @@ export class PlayerService {
       map((response: any) => response.content)
     );
   }
+
+  addPlayer(playerData: FormData): Observable<Player> {
+    const url = `${this.apiUrl}/Player`;
+    const token = this.cookieService.get('token');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.post<Player>(url, playerData, { headers });
+  }
+  
 
   getPlayerById(id: string): Observable<Player> {
     const url = `${this.apiUrl}/Player/${id}`;

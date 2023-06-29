@@ -84,6 +84,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { PlayerListComponent } from './pages/player-list/player-list.component';
 import { DashbroadComponent } from './pages/dashbroad/dashbroad.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { NewsComponent } from './pages/news/news.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -92,7 +93,8 @@ registerLocaleData(en);
     LoginComponent,
     PlayerListComponent,
     DashbroadComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    NewsComponent
   ],
   imports: [
     BrowserModule,
