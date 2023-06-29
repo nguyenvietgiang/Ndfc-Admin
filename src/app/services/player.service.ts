@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { Player } from '../models/player.model';
 import { CookieService } from 'ngx-cookie-service';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -39,6 +40,16 @@ export class PlayerService {
     const headers = { Authorization: `Bearer ${token}` };
     return this.http.delete(url, { headers });
   }  
+
+  downloadExcelFile(): Observable<Blob> {
+    const url = `${this.apiUrl}/FileExtend/Player`;
+    const token = this.cookieService.get('token');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get(url, { headers,   responseType: 'blob' }).pipe(
+      map((response: Blob) => response)
+    );
+  }
+  
 }
 
 

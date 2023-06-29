@@ -4,4 +4,14 @@
     align-items: center;
     margin-top: 10px;
   }
+  .button-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .button-container button {
+    margin-right: 10px;
+    padding-bottom: 5px;
+  }
   

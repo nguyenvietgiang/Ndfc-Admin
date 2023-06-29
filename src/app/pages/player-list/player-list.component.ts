@@ -51,6 +51,18 @@ export class PlayerListComponent implements OnInit {
       }
     );
   }
+  downloadExcelFile() {
+    this.playerService.downloadExcelFile().subscribe((blob: Blob) => {
+      this.saveFile(blob, 'exported_file.xlsx');
+    });
+  }
+
+  private saveFile(blob: Blob, fileName: string) {
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = fileName;
+    link.click();
+  }
 
   showModal(id: string): void {
     this.playerService.getPlayerById(id).subscribe(

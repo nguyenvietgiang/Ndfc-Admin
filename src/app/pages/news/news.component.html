@@ -1,1 +1,22 @@
-<p>news works!</p>
+<nz-table #basicTable2 [nzData]="listNewsData">
+    <thead>
+      <tr>
+        <th>Title</th>
+      <th>Image</th>
+      <th>Status</th>
+      <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable2.data">
+            <td>{{ data.title }}</td>
+            <td><img [src]="data.image" alt="News Image" width="100"></td>
+            <td>{{ data.status }}</td>
+            <td>{{ data.createOn }}</td>
+          </tr>
+    </tbody>
+  </nz-table>
+  
+  
+         
+  
