@@ -1,1 +1,24 @@
-<p>user-list works!</p>
+<button nz-button nzType="primary" nzShape="circle" (click)="downloadExcelFile()">
+    <i nz-icon nzType="download"></i>
+  </button>
+<nz-table #basicTable [nzData]="dataSet">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.username }}</td>
+        <td>{{ data.email }}</td>
+        <td>{{ data.role }}</td>
+        <td>
+          <button>Detail</button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  
