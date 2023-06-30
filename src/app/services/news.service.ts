@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 interface NewsItem {
   id: string;
   title: string;
-  image: string;
+  image: any;
   description: string;
   detail: string;
   createOn: string;
@@ -29,10 +29,19 @@ export class NewsService {
     );
   }
 
+  createNews(formData: FormData): Observable<any> {
+    const apiUrl = `${environment.apiUrl}/News`; 
+    const token = this.cookieService.get('token');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.post(apiUrl, formData, { headers });
+  }  
+
   deleteNew(id: string): Observable<any> {
-    const apiUrl = `${environment.apiUrl}/News${id}`;
+    const apiUrl = `${environment.apiUrl}/News/${id}`;
     const token = this.cookieService.get('token');
     const headers = { Authorization: `Bearer ${token}` };
     return this.http.delete(apiUrl, { headers });
   }  
+
+
 }

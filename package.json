@@ -19,6 +19,8 @@
     "@angular/platform-browser": "~11.2.14",
     "@angular/platform-browser-dynamic": "~11.2.14",
     "@angular/router": "~11.2.14",
+    "@ckeditor/ckeditor5-angular": "^2.0.1",
+    "@ckeditor/ckeditor5-build-classic": "^29.2.0",
     "ng-zorro-antd": "^11.4.2",
     "ngx-cookie-service": "^10.1.1",
     "rxjs": "~6.6.0",

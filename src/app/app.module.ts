@@ -80,6 +80,7 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzResizableModule } from 'ng-zorro-antd/resizable';
 import { NzPipesModule } from 'ng-zorro-antd/pipes';
 // component
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { LoginComponent } from './pages/login/login.component';
 import { PlayerListComponent } from './pages/player-list/player-list.component';
 import { DashbroadComponent } from './pages/dashbroad/dashbroad.component';
@@ -104,7 +105,7 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     IconsProviderModule,
-    
+    CKEditorModule,
     //NG Zorro
     NzAffixModule,
     NzAlertModule,
