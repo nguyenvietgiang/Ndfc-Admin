@@ -14,3 +14,10 @@
   .login-form-button {
     width: 100%;
   }
+
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
