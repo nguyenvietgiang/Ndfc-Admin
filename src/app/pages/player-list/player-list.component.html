@@ -1,4 +1,19 @@
 <div class="button-container">
+  <div class="example-input">
+    <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixIconButton">
+      <input placeholder="input here" nz-input [(ngModel)]="inputValue" (input)="onChange()" [nzAutocomplete]="auto" />
+    </nz-input-group>
+    <ng-template #suffixIconButton>
+      <button nz-button nzType="primary" nzSize="large" nzSearch (click)="onChange()">
+        <i nz-icon nzType="search" nzTheme="outline"></i>
+      </button>      
+    </ng-template>
+    <nz-autocomplete #auto>
+      <nz-auto-option class="global-search-item" *ngFor="let option of playerOptions" [nzValue]="option.value">
+        {{ option.value }}
+      </nz-auto-option>
+    </nz-autocomplete>
+  </div>  
 <button nz-button nzType="primary" (click)="showAddingModal()">
   <span>Add Player</span>
 </button>

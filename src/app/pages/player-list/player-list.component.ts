@@ -17,6 +17,8 @@ export class PlayerListComponent implements OnInit {
   addPlayerForm!: FormGroup;
   selectedImage: File | null = null;
   previewImageUrl: string | null = null;
+  inputValue: any;
+  sortDirection: 'asc' | 'desc' = 'asc';
   constructor(
     private playerService: PlayerService,
     private nzMessageService: NzMessageService,
@@ -38,6 +40,37 @@ export class PlayerListComponent implements OnInit {
       }
     );
   }
+  
+  // tìm kiếm auto complete
+  playerOptions: Array<{ value: string; category: string; count: number }> = [];
+  onChange(): void {
+    if (this.inputValue) {
+      this.playerService.searchPlayers(this.inputValue).subscribe((players: Player[]) => {
+        this.playerOptions = players.map(player => ({
+          value: player.name,
+          category: 'Player',
+          count: 1
+        }));
+        this.listOfData = players; // Gán kết quả tìm kiếm vào listOfData
+      });
+    } else {
+      this.playerOptions = [];
+      this.playerService.getPlayerList().subscribe((players: Player[]) => {
+        this.listOfData = players; // Lấy tất cả người chơi khi không có giá trị tìm kiếm
+      });
+    }
+  }  
+  // sort
+  sortData(sortOrder: "asc" | "desc"): void {
+    this.sortDirection = sortOrder;
+  }
+  
+  
+
+  private getRandomInt(max: number, min: number = 0): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  
 
   deletePlayer(id: string): void {
     this.playerService.deletePlayer(id).subscribe(

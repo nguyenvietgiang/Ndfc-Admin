@@ -21,6 +21,14 @@ export class PlayerService {
     );
   }
 
+  searchPlayers(searchName: string): Observable<Player[]> {
+    const url = `${this.apiUrl}/Player?searchName=${searchName}`;
+    return this.http.get<any>(url).pipe(
+      map((response: any) => response.content)
+    );
+  }
+  
+
   addPlayer(playerData: FormData): Observable<Player> {
     const url = `${this.apiUrl}/Player`;
     const token = this.cookieService.get('token');
