@@ -5,6 +5,7 @@
         <nz-input-group nzPrefixIcon="user">
           <input type="text" nz-input formControlName="userName" placeholder="Username" />
         </nz-input-group>
+        <div class="error-message">{{ errors.userName }}</div>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -12,6 +13,7 @@
         <nz-input-group nzPrefixIcon="lock">
           <input type="password" nz-input formControlName="password" placeholder="Password" />
         </nz-input-group>
+        <div class="error-message">{{ errors.password }}</div>
       </nz-form-control>
     </nz-form-item>
     <div nz-row class="login-form-margin">

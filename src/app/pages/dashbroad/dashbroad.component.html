@@ -1,3 +1,34 @@
+<div>
 <nz-progress [nzPercent]="75" nzType="circle" [nzWidth]="80"></nz-progress>
 <nz-progress [nzPercent]="70" nzType="circle" [nzWidth]="80" nzStatus="exception"></nz-progress>
 <nz-progress [nzPercent]="100" nzType="circle" [nzWidth]="80"></nz-progress>
+</div>
+<div>
+    <nz-progress [nzPercent]="30"></nz-progress>
+    <nz-progress [nzPercent]="50" nzStatus="active"></nz-progress>
+    <nz-progress [nzPercent]="70" nzStatus="exception"></nz-progress>
+    <nz-progress [nzPercent]="100"></nz-progress>
+    <nz-progress [nzPercent]="50" [nzShowInfo]="false"></nz-progress>
+</div>
+<div>
+    <nz-card nzTitle="Tệp">
+        <p style="font-size:14px;color:rgba(0, 0, 0, 0.85);margin-bottom:16px;font-weight: 500;">
+          Tệp file mẫu
+        </p>
+        <nz-card nzType="inner" nzTitle="File chúc mừng sinh nhật câu lạc bộ" [nzExtra]="extraTemplate">
+            <button nz-button nzType="primary">
+                <i nz-icon nzType="download"></i>
+                <span>Lấy file</span>
+              </button>
+        </nz-card>
+        <nz-card nzType="inner" nzTitle="File Excel thêm danh sách người dùng" [nzExtra]="extraTemplate">
+            <button nz-button nzType="primary">
+                <i nz-icon nzType="download"></i>
+                <span>Lấy file</span>
+              </button>
+        </nz-card>
+      </nz-card>
+      <ng-template #extraTemplate>
+        <a>More</a>
+      </ng-template>
+</div>

@@ -7,6 +7,7 @@ import { DashbroadComponent } from './pages/dashbroad/dashbroad.component';
 import { NewsComponent } from './pages/news/news.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
+import { MatchesComponent } from './pages/matches/matches.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'dashbroad', component: DashbroadComponent, canActivate: [AuthGuard] },
   { path: 'contact', component: ContactComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserListComponent, canActivate: [AuthGuard] },
+  { path: 'matches', component: MatchesComponent, canActivate: [AuthGuard] },
 //  { path: '', pathMatch: 'full', redirectTo: '/welcome' },
 //  { path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) }
 ];

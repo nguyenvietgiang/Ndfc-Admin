@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
-
+    
   ) {}
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       remember: [true]
     });
   }
-
+  errors = { userName: '', password: '' };
   submitForm(): void {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
@@ -41,7 +41,13 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/player']); // Chuyển hướng đến '/player'
         },
         (error) => {
-          // Xử lý lỗi đăng nhập
+          if (error.status === 401) {
+            // Unauthorized, display error message
+            this.errors.userName = 'Sai tên đăng nhập';
+            this.errors.password = 'Sai mật khẩu';
+          } else {
+            // Handle other errors
+          }
         }
       );
     }
